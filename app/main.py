@@ -1,20 +1,9 @@
 # Imports for this project
-from enum import auto
-from turtle import st
-from typing import Optional, List
-from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
-from fastapi.params import Body
-from pydantic import BaseModel
-from random import randrange
-import psycopg2
-from psycopg2.extras import RealDictCursor
-import time
-from . import models, schemas, utils
-from .database import engine, get_db
-from sqlalchemy.orm import Session
-from sqlalchemy.sql.functions import mode
-from .routers import user, post, auth
-from .config import settings
+from fastapi import FastAPI
+from . import models
+from .database import engine
+from .routers import user, post, auth, vote
+
 # uses models package
 models.Base.metadata.create_all(bind=engine)
 
@@ -54,7 +43,7 @@ app = FastAPI()
 app.include_router(post.router)
 app.include_router(user.router)
 app.include_router(auth.router)
-
+app.include_router(vote.router)
 @app.get("/")
 def root():
     return {"message": "Hello World"}

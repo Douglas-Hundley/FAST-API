@@ -2,6 +2,8 @@ import email
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
 from typing import Optional
+from pydantic.types import conint
+from typing import Literal
 # establishes validation of posts
 class PostBase(BaseModel):
     title: str
@@ -42,3 +44,8 @@ class Token(BaseModel):
     
 class TokenData(BaseModel):
     id: Optional[str] = None
+    
+class Vote(BaseModel):
+    post_id: int
+    dir: Literal[0,1]
+    #dir: conint(le=1)
