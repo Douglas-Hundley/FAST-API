@@ -1,8 +1,8 @@
-import email
+
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
 from typing import Optional
-from pydantic.types import conint
+
 from typing import Literal
 # establishes validation of posts
 class PostBase(BaseModel):
